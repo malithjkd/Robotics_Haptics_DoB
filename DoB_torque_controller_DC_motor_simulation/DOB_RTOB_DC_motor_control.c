@@ -48,14 +48,13 @@ float Kp = 7.0;
 float Ki = 0.0;
 float Kd = 0.0;
 
-
-int main(){
+int main()
+{
 	FILE *fp = NULL;
 	fp = fopen("motor_simulate_data.txt","w");
 
-
-	for(Time = 0;Time<=15;Time += dt){
-		
+	for(Time = 0;Time<=15;Time += dt)
+	{
 		Torque_error = Torque_cmd - Torque_ext_est;
 		PID();
 		Ia_ref = Theta_double_dot*Jn/Ktn; 
@@ -65,10 +64,10 @@ int main(){
 		rtob();
 		fprintf(fp,"%f\t %f\t %f\t %f\t %f\n",Time,Theta_dot,Torque_cmd,Torque_dis,Torque_ext_est);
 
-		if (Time >=1){
+		if (Time >= 1)
+		{
 			Torque_dis = Theta_dot*0.00005;			//this should change according to controler capability
-		}
-		
+		}		
 	}
 	fclose(fp);
 	return 0;
